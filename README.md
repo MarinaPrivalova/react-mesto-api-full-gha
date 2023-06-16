@@ -36,7 +36,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.96.91;
+IP 158.160.96.91;
 
 Frontend https://privalovama.students.nomoredomains.rocks;
 
