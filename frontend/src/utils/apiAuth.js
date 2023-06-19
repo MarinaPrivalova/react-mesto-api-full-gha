@@ -1,4 +1,4 @@
-export const BASE_URL = ' https://auth.nomoreparties.co';
+export const BASE_URL = 'https://api.privalovama.students.nomoredomains.rocks';
 
 /**Обработать ответ*/
 function handleReply(res) {
