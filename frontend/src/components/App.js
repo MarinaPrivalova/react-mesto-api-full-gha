@@ -99,7 +99,7 @@ function App() {
 
   function handleCardLike(card) {
     /**Снова проверить, есть ли уже лайк на этой карточке*/
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some((id) => id === currentUser._id);
     
     /**Отправить запрос в API и получить обновлённые данные карточки*/
     api.changeLikeCardStatus(card._id, !isLiked)

@@ -31,7 +31,7 @@ export function login(data) {
 };
 
 /**Запрос токена*/
-export function checkToken (token) {
+export function checkToken(token) {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {

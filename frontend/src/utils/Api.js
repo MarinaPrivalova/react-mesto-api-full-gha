@@ -96,7 +96,7 @@ const api = new Api({
   url: "https://api.privalovama.students.nomoredomains.rocks",
   headers: {
     "Content-Type": "application/json",
-    "authorization": "",
+    Authorization: "",
   }
 })
 

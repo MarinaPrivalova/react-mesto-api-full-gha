@@ -6,7 +6,7 @@ const ForbiddenError = require('../utils/errors/ForbiddenError');
 
 const getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.status(STATUS_CODES.OK).send({ cards }))
+    .then((cards) => res.status(STATUS_CODES.OK).send(cards))
     .catch(next);
 };
 
@@ -14,7 +14,7 @@ const createCard = (req, res, next) => {
   const { name, link } = req.body;
 
   return Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.status(STATUS_CODES.CREATED).send({ card }))
+    .then((card) => res.status(STATUS_CODES.CREATED).send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Введены некорректные данные'));
@@ -52,7 +52,7 @@ const likeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
       }
-      res.status(STATUS_CODES.OK).send({ data: card });
+      res.status(STATUS_CODES.OK).send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -72,7 +72,7 @@ const dislikeCard = (req, res, next) => {
       if (!card) {
         throw new NotFoundError('Карточка не найдена');
       }
-      res.status(STATUS_CODES.OK).send({ data: card });
+      res.status(STATUS_CODES.OK).send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
