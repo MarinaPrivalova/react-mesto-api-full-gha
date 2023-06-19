@@ -1,9 +1,9 @@
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const bodyParser = require('body-parser');
-const handlerCORS = require('./middlewares/handlerCORS');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const auth = require('./middlewares/auth');
@@ -15,6 +15,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000, MONGO_URL = 'mongodb://127.0.0.1/mestodb' } = process.env;
 
 const app = express();
+app.use(cors());
 
 mongoose.connect(MONGO_URL)
   .then(() => console.log('База данных подключена'))
@@ -27,7 +28,6 @@ app.use(requestLogger);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(handlerCORS);
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
