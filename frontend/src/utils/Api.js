@@ -93,7 +93,7 @@ class Api {
 }
 
 const api = new Api({
-  url: "https://api.privalovama.students.nomoredomains.rocks",
+  url: "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
     Authorization: "",
