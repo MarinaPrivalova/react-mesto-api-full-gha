@@ -47,8 +47,8 @@ function App() {
   useEffect(() => {
     if(loggedIn) {
       Promise.all([api.getUserInfo(), api.getAllCards()])
-        .then(([data, cards]) => {
-          setCurrentUser({ ...currentUser, ...data });
+        .then(([userData, cards]) => {
+          setCurrentUser(userData);
           setCards(cards);
         })
         .catch((err) => {
@@ -172,9 +172,10 @@ function App() {
     if (token) {
       apiAuth.checkToken(token)
         .then((res) => {
-          if (res && res.data) {
+          if (res) {
+            api.setToken(token);
             setLoggedIn(true);
-            setCurrentUser({ ...currentUser, email: res.data.email });
+            // setCurrentUser(currentUser);
             navigate('/');
           }
         })
@@ -208,9 +209,12 @@ function App() {
     apiAuth.login(loginData)
       .then((res) => {
         if (res && res.token) {
-          setCurrentUser({ ...currentUser, email: loginData.email })
+          setCurrentUser(currentUser)
           localStorage.setItem('jwt', res.token);
-          checkToken();
+          //checkToken();
+          api.setToken(res.token);
+          setLoggedIn(true);
+          navigate('/');
         }
       })
       .catch((err) => {
@@ -223,6 +227,7 @@ function App() {
   function logOut() {
     setLoggedIn(false);
     setCurrentUser(defaultCurrentUser);
+    api.setToken(null);
     localStorage.removeItem('jwt')
   };
 
@@ -237,8 +242,6 @@ function App() {
           />
 
           <Routes>
-            <Route path='/sign-up' element={<Register onRegister={handleRegister} />} />
-            <Route path='/sign-in' element={<Login onLogin={handleLogin} />} />
             <Route path='/' 
               element={<ProtectedRoute
                 loggedIn={loggedIn}
@@ -252,6 +255,8 @@ function App() {
                 cards={cards} 
               />} 
             />
+            <Route path='/sign-up' element={<Register onRegister={handleRegister} />} />
+            <Route path='/sign-in' element={<Login onLogin={handleLogin} />} />
           </Routes>
 
           <EditProfilePopup
