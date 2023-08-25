@@ -38,6 +38,6 @@
 
 IP 158.160.96.91;
 
-Frontend https://privalovama.students.nomoredomains.rocks;
+Frontend https://privalovama.students.nomoredomains.rocks; (Виртуальная машина остановлена)
 
-Backend https://api.privalovama.students.nomoredomains.rocks;
+Backend https://api.privalovama.students.nomoredomains.rocks; (Виртуальная машина остановлена)
